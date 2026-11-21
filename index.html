@@ -1,0 +1,1239 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sania Sarwar — Frontend Developer | Python Programmer | Copywriter</title>
+  <meta name="description" content="Portfolio of Sania Sarwar — Frontend Developer, Python Programmer, and Conversion Copywriter building responsive digital experiences and business-focused websites." />
+  
+  <!-- Google Fonts: Editorial Serif + Neo-Grotesque Sans + Precision Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            obsidian: '#08080A',
+            charcoal: '#111115',
+            elevated: '#17171D',
+            champagne: '#D4AF37',
+            champagneLight: '#E8CC75',
+            cream: '#F4F1EA',
+            silver: '#9CA3AF',
+            emeraldStatus: '#10B981',
+          },
+          fontFamily: {
+            serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          backgroundImage: {
+            'radial-gold': 'radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.12) 0%, rgba(8, 8, 10, 0) 65%)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    :root {
+      --bg-obsidian: #08080A;
+      --bg-card: #111115;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --accent-gold: #D4AF37;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: var(--bg-obsidian);
+      color: #F4F1EA;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Subtle Film-Grain Texture Overlay */
+    .film-grain {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Spotlight Card Border & Surface Hover */
+    .spotlight-card {
+      position: relative;
+      background: linear-gradient(180deg, rgba(23, 23, 29, 0.72) 0%, rgba(17, 17, 21, 0.92) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
+    }
+
+    .spotlight-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      padding: 1px;
+      background: radial-gradient(
+        480px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(212, 175, 55, 0.42),
+        transparent 45%
+      );
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .spotlight-card:hover::before {
+      opacity: 1;
+    }
+
+    .spotlight-card:hover {
+      transform: translateY(-3px);
+    }
+
+    /* Subtle Ambient Grid Lines */
+    .engineering-grid {
+      background-size: 64px 64px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.024) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.024) 1px, transparent 1px);
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #08080A;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #26262E;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #D4AF37;
+    }
+
+    /* Reveal Animation Utility */
+    .reveal-item {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal-item.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Modal Backdrop Blur */
+    .modal-backdrop {
+      background: rgba(5, 5, 7, 0.84);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="selection:bg-champagne/30 selection:text-cream">
+
+  <!-- Film Grain Overlay -->
+  <div class="film-grain" aria-hidden="true"></div>
+
+  <!-- Minimal Luxury Top Navigation -->
+  <header class="fixed top-0 inset-x-0 z-50 border-b border-white/[0.07] bg-obsidian/80 backdrop-blur-xl">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+      <a href="#top" class="flex items-center gap-3 group">
+        <span class="w-8 h-8 rounded-full border border-champagne/40 bg-champagne/10 flex items-center justify-center font-serif italic text-lg text-champagne group-hover:bg-champagne group-hover:text-obsidian transition-colors">
+          S
+        </span>
+        <span class="font-medium tracking-tight text-sm sm:text-base text-cream">Sania Sarwar</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-xs font-mono uppercase tracking-widest text-silver">
+        <a href="#work" class="hover:text-champagne transition-colors">Work</a>
+        <a href="#capabilities" class="hover:text-champagne transition-colors">Arsenal</a>
+        <a href="#writing" class="hover:text-champagne transition-colors">Copywriting</a>
+        <a href="#about" class="hover:text-champagne transition-colors">About</a>
+        <a href="#contact" class="hover:text-champagne transition-colors">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-3">
+        <a href="#contact" class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-medium bg-cream text-obsidian hover:bg-champagne hover:text-obsidian transition-all duration-300 shadow-sm">
+          <span>Initiate Inquiry</span>
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main id="top" class="engineering-grid bg-radial-gold pt-28 sm:pt-36">
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="max-w-6xl mx-auto px-5 sm:px-8 pb-20 sm:pb-28">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        
+        <!-- Left Column: High-Authority Editorial Positioning -->
+        <div class="lg:col-span-8 space-y-7">
+          <!-- Live Availability Pill -->
+          <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full border border-emeraldStatus/30 bg-emeraldStatus/10 text-emerald-300 text-xs font-mono">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emeraldStatus opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emeraldStatus"></span>
+            </span>
+            <span>Available for Freelance Projects &amp; Internship Opportunities</span>
+          </div>
+
+          <!-- Primary Headline -->
+          <h1 class="font-serif text-5xl sm:text-6xl lg:text-[4.35rem] leading-[1.04] tracking-tight text-cream font-normal">
+            Building Digital Experiences That Help Businesses <span class="italic text-champagne">Stand Out.</span>
+          </h1>
+
+          <!-- Hero Introduction (High-Authority Client Positioning) -->
+          <p class="text-base sm:text-lg text-silver leading-relaxed max-w-2xl font-light">
+            I’m Sania Sarwar, a Frontend Developer and Website Copywriter helping businesses turn visitors into clients through clean, responsive code, practical Python solutions, and clear, conversion-focused messaging.
+          </p>
+
+          <!-- Positioning Statement Block -->
+          <div class="border-l-2 border-champagne/60 pl-4 py-1 text-sm text-cream/90 italic">
+            “Building responsive digital experiences, practical web solutions, and business-focused content.”
+          </div>
+
+          <!-- Primary & Secondary CTAs -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#work" class="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-champagne text-obsidian font-semibold text-sm hover:bg-champagneLight transition-all shadow-lg shadow-champagne/10">
+              <span>Explore Selected Work</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </a>
+
+            <a href="https://github.com/saniatech-ui" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-white/15 bg-charcoal/80 text-cream text-sm font-medium hover:border-champagne/50 hover:text-champagne transition-all">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+              <span>GitHub</span>
+            </a>
+
+            <a href="https://www.linkedin.com/in/saniasarwar-dev" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3.5 rounded-xl border border-white/15 bg-charcoal/80 text-cream text-sm font-medium hover:border-champagne/50 hover:text-champagne transition-all">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              <span>LinkedIn</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right Column: Secondary Minimal Dossier Card -->
+        <div class="lg:col-span-4">
+          <div class="spotlight-card rounded-2xl p-6 space-y-5">
+            <!-- Header with Clean Monogram Badge -->
+            <div class="flex items-center gap-4">
+              <div class="relative w-16 h-16 rounded-2xl overflow-hidden border border-champagne/40 bg-elevated shrink-0 flex items-center justify-center">
+                <svg viewBox="0 0 120 120" class="w-full h-full" role="img" aria-label="Sania Sarwar Monogram">
+                  <defs>
+                    <linearGradient id="navyHijab" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#1E3A5F"/>
+                      <stop offset="100%" stop-color="#0F1E36"/>
+                    </linearGradient>
+                    <linearGradient id="goldRim" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#D4AF37"/>
+                      <stop offset="100%" stop-color="#8A6D1B"/>
+                    </linearGradient>
+                  </defs>
+                  <rect width="120" height="120" fill="#12141D"/>
+                  <circle cx="60" cy="60" r="46" fill="url(#navyHijab)" stroke="url(#goldRim)" stroke-width="1.5"/>
+                  <path d="M35 88 C35 66, 85 66, 85 88" fill="#172B49" stroke="#D4AF37" stroke-width="1" stroke-opacity="0.5"/>
+                  <circle cx="60" cy="50" r="17" fill="#233858" stroke="#D4AF37" stroke-width="1.2"/>
+                  <text x="60" y="55" text-anchor="middle" fill="#F4F1EA" font-family="Georgia, serif" font-style="italic" font-size="15">SS</text>
+                </svg>
+              </div>
+              <div>
+                <p class="font-mono text-[11px] uppercase tracking-widest text-champagne">Developer Dossier</p>
+                <h2 class="text-lg font-semibold text-cream">Sania Sarwar</h2>
+              </div>
+            </div>
+
+            <div class="h-px bg-white/[0.07]"></div>
+
+            <!-- Structured Metadata Specs -->
+            <dl class="space-y-3 text-xs">
+              <div class="flex justify-between gap-2">
+                <dt class="font-mono text-silver">DISCIPLINES</dt>
+                <dd class="text-cream text-right font-medium">Frontend · Python · Copy</dd>
+              </div>
+              <div class="flex justify-between gap-2">
+                <dt class="font-mono text-silver">LOCATION</dt>
+                <dd class="text-cream text-right">Kasur, Punjab, Pakistan</dd>
+              </div>
+              <div class="flex justify-between gap-2">
+                <dt class="font-mono text-silver">TIME ZONE</dt>
+                <dd class="text-cream text-right font-mono">PKT (UTC+5)</dd>
+              </div>
+              <div class="flex justify-between gap-2">
+                <dt class="font-mono text-silver">EDUCATION</dt>
+                <dd class="text-cream text-right">BSCS · GCUF (5th Sem)</dd>
+              </div>
+              <div class="flex justify-between gap-2">
+                <dt class="font-mono text-silver">DEPLOYMENTS</dt>
+                <dd class="text-champagne text-right font-mono">5 Live Web Builds</dd>
+              </div>
+            </dl>
+
+            <div class="pt-1">
+              <button onclick="copyEmailQuick()" id="quickCopyBtn" class="w-full py-2.5 px-4 rounded-xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.07] hover:border-champagne/40 text-xs font-mono text-cream flex items-center justify-between transition-all">
+                <span>saniadigitalhubs@gmail.com</span>
+                <span id="copyStatusTag" class="text-champagne">COPY</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== SELECTED WORK & CASE STUDIES ==================== -->
+    <section id="work" class="max-w-6xl mx-auto px-5 sm:px-8 py-20 border-t border-white/[0.07]">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 reveal-item">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-champagne mb-2">01 / Selected Engineering &amp; Product Builds</p>
+          <h2 class="font-serif text-4xl sm:text-5xl text-cream">Live Websites &amp; <span class="italic text-champagne">Case Studies</span></h2>
+        </div>
+
+        <!-- Interactive Category Filter Tabs -->
+        <div class="flex flex-wrap gap-2" role="tablist" aria-label="Filter projects by category">
+          <button class="filter-btn active px-3.5 py-1.5 rounded-full text-xs font-mono border border-champagne bg-champagne/15 text-champagne transition-all" data-filter="all">
+            All (5)
+          </button>
+          <button class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-mono border border-white/10 bg-charcoal text-silver hover:text-cream transition-all" data-filter="platform">
+            Technology Platform
+          </button>
+          <button class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-mono border border-white/10 bg-charcoal text-silver hover:text-cream transition-all" data-filter="dental">
+            Dental &amp; Healthcare
+          </button>
+          <button class="filter-btn px-3.5 py-1.5 rounded-full text-xs font-mono border border-white/10 bg-charcoal text-silver hover:text-cream transition-all" data-filter="salon">
+            Beauty &amp; Wellness
+          </button>
+        </div>
+      </div>
+
+      <!-- FLAGSHIP FEATURED PROJECT: TechVault AI (Full-Width Bento Card) -->
+      <article class="project-card spotlight-card rounded-3xl p-6 sm:p-9 mb-8 reveal-item" data-category="platform">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Left Content & Architecture -->
+          <div class="lg:col-span-7 space-y-5">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-champagne/15 text-champagne border border-champagne/30">
+                Flagship Product · Technology Platform
+              </span>
+              <span class="px-3 py-1 rounded-full text-[11px] font-mono text-silver bg-white/[0.04] border border-white/10">
+                Independent Build &amp; Deployment
+              </span>
+            </div>
+
+            <h3 class="font-serif text-3xl sm:text-4xl text-cream">TechVault AI</h3>
+
+            <p class="text-sm sm:text-base text-silver leading-relaxed">
+              A technology product discovery and affiliate curation platform built to help buyers search, filter, and compare hardware and tech gear before navigating directly to verified Amazon purchasing pages.
+            </p>
+
+            <!-- Case Study Sequence Mini-Tabs -->
+            <div class="rounded-2xl border border-white/[0.08] bg-obsidian/70 p-4 space-y-3">
+              <div class="flex flex-wrap gap-2 border-b border-white/[0.07] pb-2.5 text-[11px] font-mono">
+                <button type="button" onclick="switchVaultTab('goal')" class="vault-tab text-champagne font-semibold" data-tab="goal">01. Goal</button>
+                <span class="text-white/20">/</span>
+                <button type="button" onclick="switchVaultTab('approach')" class="vault-tab text-silver hover:text-cream" data-tab="approach">02. My Approach</button>
+                <span class="text-white/20">/</span>
+                <button type="button" onclick="switchVaultTab('implementation')" class="vault-tab text-silver hover:text-cream" data-tab="implementation">03. Implementation</button>
+                <span class="text-white/20">/</span>
+                <button type="button" onclick="switchVaultTab('learned')" class="vault-tab text-silver hover:text-cream" data-tab="learned">04. What I Learned</button>
+              </div>
+              <p id="vaultTabContent" class="text-xs sm:text-sm text-cream/90 leading-relaxed">
+                <strong class="text-champagne">Goal:</strong> Eliminate buyer friction when researching tech hardware by organizing curated product cards, structured category filtering, and side-by-side comparison flows in a single fast-loading interface.
+              </p>
+            </div>
+
+            <!-- Verified Tech Stack Pills -->
+            <div class="flex flex-wrap gap-2 pt-1">
+              <span class="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 font-mono text-xs text-cream">HTML5</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 font-mono text-xs text-cream">CSS3</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 font-mono text-xs text-cream">JavaScript</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 font-mono text-xs text-cream">Responsive UI</span>
+              <span class="px-2.5 py-1 rounded-md bg-white/[0.04] border border-white/10 font-mono text-xs text-cream">GitHub Pages</span>
+            </div>
+
+            <!-- Action Links -->
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a href="https://saniatech-ui.github.io/techvault-ai/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-champagne text-obsidian font-semibold text-xs sm:text-sm hover:bg-champagneLight transition-all">
+                <span>View Live Project</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              </a>
+              <button type="button" onclick="openCaseStudyModal('techvault')" class="inline-flex items-center gap-2 px-4 py-3 rounded-xl border border-white/15 text-xs sm:text-sm font-mono text-cream hover:border-champagne/50 hover:text-champagne transition-all">
+                <span>Inspect Full Case Study</span>
+              </button>
+            </div>
+
+            <!-- Affiliate Disclosure -->
+            <p class="text-[11px] text-silver/70 font-mono pt-1">
+              Disclosure: TechVault AI incorporates Amazon Associates affiliate product links for direct purchasing redirection.
+            </p>
+          </div>
+
+          <!-- Right Visual Mockup Frame (Desktop + Mobile Preview Schematic) -->
+          <div class="lg:col-span-5">
+            <div class="rounded-2xl border border-white/10 bg-obsidian p-4 shadow-2xl space-y-3">
+              <!-- Browser Chrome Bar -->
+              <div class="flex items-center justify-between border-b border-white/[0.08] pb-3">
+                <div class="flex items-center gap-1.5">
+                  <span class="w-2.5 h-2.5 rounded-full bg-red-500/60"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500/60"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/60"></span>
+                </div>
+                <span class="text-[10px] font-mono text-silver truncate max-w-[200px]">saniatech-ui.github.io/techvault-ai</span>
+                <span class="text-[10px] font-mono text-emerald-400">LIVE</span>
+              </div>
+
+              <!-- Interface Wireframe Representation -->
+              <div class="space-y-3 pt-1">
+                <div class="p-3.5 rounded-xl bg-gradient-to-br from-elevated to-charcoal border border-champagne/25">
+                  <div class="flex items-center justify-between mb-2">
+                    <span class="text-[10px] font-mono uppercase text-champagne">Product Discovery Engine</span>
+                    <span class="text-[10px] font-mono text-silver">Search &amp; Compare</span>
+                  </div>
+                  <div class="h-7 rounded-lg bg-obsidian border border-white/10 px-3 flex items-center justify-between text-[11px] text-silver font-mono">
+                    <span>Filter categories, specs &amp; gear...</span>
+                    <span class="text-champagne">⌕</span>
+                  </div>
+                </div>
+
+                <!-- Product Cards Schematic -->
+                <div class="grid grid-cols-2 gap-2.5">
+                  <div class="p-3 rounded-xl bg-charcoal border border-white/[0.07] space-y-1.5">
+                    <div class="h-14 rounded-lg bg-white/[0.03] border border-white/[0.05] flex items-center justify-center font-mono text-[10px] text-champagne">
+                      [Product Card UI]
+                    </div>
+                    <p class="text-[11px] font-medium text-cream">Category Filter</p>
+                    <p class="text-[10px] text-silver">Direct Amazon Link →</p>
+                  </div>
+                  <div class="p-3 rounded-xl bg-charcoal border border-white/[0.07] space-y-1.5">
+                    <div class="h-14 rounded-lg bg-white/[0.03] border border-white/[0.05] flex items-center justify-center font-mono text-[10px] text-champagne">
+                      [Compare Matrix]
+                    </div>
+                    <p class="text-[11px] font-medium text-cream">Product Comparison</p>
+                    <p class="text-[10px] text-silver">Buyer Decision Flow →</p>
+                  </div>
+                </div>
+
+                <!-- Implemented Features Strip -->
+                <div class="pt-1 flex flex-wrap gap-1.5 text-[10px] font-mono text-silver">
+                  <span class="px-2 py-0.5 rounded bg-white/[0.04]">Product Discovery</span>
+                  <span class="px-2 py-0.5 rounded bg-white/[0.04]">Product Search</span>
+                  <span class="px-2 py-0.5 rounded bg-white/[0.04]">Product Comparison</span>
+                  <span class="px-2 py-0.5 rounded bg-white/[0.04]">Affiliate Redirection</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+
+      <!-- ASYMMETRIC 2x2 GRID FOR CLIENT-READY BUSINESS WEBSITES -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- PROJECT 2: Cavalry Dental & Aesthetic Care -->
+        <article class="project-card spotlight-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between reveal-item" data-category="dental">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-sky-500/10 text-sky-300 border border-sky-400/20">
+                Healthcare &amp; Clinic
+              </span>
+              <span class="text-[11px] font-mono text-silver">Client-Ready Build</span>
+            </div>
+
+            <h3 class="font-serif text-2xl sm:text-3xl text-cream">Cavalry Dental &amp; Aesthetic Care</h3>
+
+            <p class="text-sm text-silver leading-relaxed">
+              Multi-branch dental clinic platform built for Cavalry Ground &amp; DHA Phase 6 branches, engineered to clarify clinical treatments, highlight special care packages, and simplify patient WhatsApp inquiries.
+            </p>
+
+            <div class="p-3.5 rounded-xl bg-obsidian/70 border border-white/[0.06] space-y-2 text-xs">
+              <p class="text-cream/90"><strong class="text-champagne font-mono">Context:</strong> Multi-branch dental clinic platform built for Cavalry Ground &amp; DHA Phase 6 branches.</p>
+              <p class="text-silver"><strong class="text-cream font-mono">Implemented:</strong> Branch location architecture, service showcase, special packages layout, responsive navigation, and direct WhatsApp appointment booking flow.</p>
+            </div>
+          </div>
+
+          <div class="pt-6 space-y-4">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">HTML5</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">Tailwind CSS</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">JavaScript</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">Vercel</span>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-white/[0.07]">
+              <a href="https://cavalry-dental-care-theta.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-champagne hover:text-champagneLight transition-colors">
+                <span>View Live Website</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+              <button type="button" onclick="openCaseStudyModal('cavalry')" class="text-xs font-mono text-silver hover:text-cream transition-colors">
+                Inspect Case Study →
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 3: Ayzal Beauty Salon -->
+        <article class="project-card spotlight-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between reveal-item" data-category="salon">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-rose-500/10 text-rose-300 border border-rose-400/20">
+                Beauty &amp; Salon
+              </span>
+              <span class="text-[11px] font-mono text-silver">Client-Ready Build</span>
+            </div>
+
+            <h3 class="font-serif text-2xl sm:text-3xl text-cream">Ayzal Beauty Salon</h3>
+
+            <p class="text-sm text-silver leading-relaxed">
+              Digital service showcase crafted for Ayzal Beauty Salon (Allama Iqbal Town), structuring bridal, makeup, and skin treatment menus to streamline client consultation and booking requests.
+            </p>
+
+            <div class="p-3.5 rounded-xl bg-obsidian/70 border border-white/[0.06] space-y-2 text-xs">
+              <p class="text-cream/90"><strong class="text-champagne font-mono">Context:</strong> Digital salon platform tailored for Ayzal Beauty Salon in Allama Iqbal Town.</p>
+              <p class="text-silver"><strong class="text-cream font-mono">Implemented:</strong> Bridal, makeup, and skin service catalogs, mobile-first responsive layout, and one-tap WhatsApp appointment inquiry routing.</p>
+            </div>
+          </div>
+
+          <div class="pt-6 space-y-4">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">HTML5</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">CSS3</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">JavaScript</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">Vercel</span>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-white/[0.07]">
+              <a href="https://ayzal-beauty-salon.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-champagne hover:text-champagneLight transition-colors">
+                <span>View Live Website</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+              <button type="button" onclick="openCaseStudyModal('ayzal')" class="text-xs font-mono text-silver hover:text-cream transition-colors">
+                Inspect Case Study →
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 4: Dream Smile Dental Clinic -->
+        <article class="project-card spotlight-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between reveal-item" data-category="dental">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-sky-500/10 text-sky-300 border border-sky-400/20">
+                Healthcare &amp; Clinic
+              </span>
+              <span class="text-[11px] font-mono text-silver">Case Study</span>
+            </div>
+
+            <h3 class="font-serif text-2xl sm:text-3xl text-cream">Dream Smile Dental Clinic</h3>
+
+            <p class="text-sm text-silver leading-relaxed">
+              Modern cosmetic dentistry platform designed for Dream Smile Dental Clinic (Bahria Town), presenting specialized procedures such as Emax Veneers and Invisalign alongside practitioner credentials.
+            </p>
+
+            <div class="p-3.5 rounded-xl bg-obsidian/70 border border-white/[0.06] space-y-2 text-xs">
+              <p class="text-cream/90"><strong class="text-champagne font-mono">Context:</strong> Cosmetic dentistry web experience designed for Dream Smile Dental Clinic in Bahria Town.</p>
+              <p class="text-silver"><strong class="text-cream font-mono">Implemented:</strong> Doctor profile layout, dedicated Emax Veneers &amp; Invisalign treatment sections, responsive UI, and WhatsApp booking triggers.</p>
+            </div>
+          </div>
+
+          <div class="pt-6 space-y-4">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">HTML5</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">Tailwind CSS</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">JavaScript</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">Vercel</span>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-white/[0.07]">
+              <a href="https://dream-smile-clinic-five.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-champagne hover:text-champagneLight transition-colors">
+                <span>View Live Website</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+              <button type="button" onclick="openCaseStudyModal('dreamsmile')" class="text-xs font-mono text-silver hover:text-cream transition-colors">
+                Inspect Case Study →
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- PROJECT 5: Saadia’s Studio & Salon -->
+        <article class="project-card spotlight-card rounded-2xl p-6 sm:p-7 flex flex-col justify-between reveal-item" data-category="salon">
+          <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2">
+              <span class="px-2.5 py-1 rounded-full text-[11px] font-mono uppercase tracking-wider bg-rose-500/10 text-rose-300 border border-rose-400/20">
+                Beauty &amp; Salon
+              </span>
+              <span class="text-[11px] font-mono text-silver">Client-Ready Build</span>
+            </div>
+
+            <h3 class="font-serif text-2xl sm:text-3xl text-cream">Saadia’s Studio &amp; Salon</h3>
+
+            <p class="text-sm text-silver leading-relaxed">
+              Editorial salon and bridal studio platform created for Saadia’s Studio &amp; Salon (Johar Town), organizing bridal packages, hair styling, and skin care treatments into a clean, high-trust booking experience.
+            </p>
+
+            <div class="p-3.5 rounded-xl bg-obsidian/70 border border-white/[0.06] space-y-2 text-xs">
+              <p class="text-cream/90"><strong class="text-champagne font-mono">Context:</strong> Bridal and beauty studio platform crafted for Saadia’s Studio &amp; Salon in Johar Town.</p>
+              <p class="text-silver"><strong class="text-cream font-mono">Implemented:</strong> Structured bridal, hair, and skin service architecture, responsive grid design, and direct WhatsApp consultation CTA.</p>
+            </div>
+          </div>
+
+          <div class="pt-6 space-y-4">
+            <div class="flex flex-wrap gap-1.5">
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">HTML5</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">CSS3</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">JavaScript</span>
+              <span class="px-2 py-0.5 rounded bg-white/[0.04] border border-white/10 font-mono text-[11px] text-silver">Vercel</span>
+            </div>
+
+            <div class="flex items-center justify-between pt-2 border-t border-white/[0.07]">
+              <a href="https://saadia-studio-salon.vercel.app" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 text-xs font-semibold text-champagne hover:text-champagneLight transition-colors">
+                <span>View Live Website</span>
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+              </a>
+              <button type="button" onclick="openCaseStudyModal('saadia')" class="text-xs font-mono text-silver hover:text-cream transition-colors">
+                Inspect Case Study →
+              </button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== TECHNICAL ARSENAL (CATEGORIZED & HONEST) ==================== -->
+    <section id="arsenal" class="max-w-6xl mx-auto px-5 sm:px-8 py-20 border-t border-white/[0.07]">
+      <div class="mb-12 reveal-item">
+        <p class="font-mono text-xs uppercase tracking-widest text-champagne mb-2">02 / Verified Capabilities</p>
+        <h2 class="font-serif text-4xl sm:text-5xl text-cream">Technical &amp; <span class="italic text-champagne">Strategic Arsenal</span></h2>
+        <p class="text-sm text-silver mt-2 max-w-2xl">
+          Structured across primary frontend engineering, foundational Python programming, and business-focused conversion copywriting.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Pillar 1: Primary Direction — Frontend Development -->
+        <div class="spotlight-card rounded-2xl p-6 sm:p-7 space-y-5 reveal-item">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-md bg-champagne/15 border border-champagne/30 font-mono text-[11px] text-champagne">PRIMARY FOCUS</span>
+            <span class="font-mono text-xs text-silver">01</span>
+          </div>
+          <h3 class="font-serif text-2xl text-cream">Frontend Development</h3>
+          <p class="text-xs text-silver leading-relaxed">
+            Translating business requirements into responsive, accessible, and clean browser interfaces deployed to modern cloud hosts.
+          </p>
+          <ul class="space-y-2.5 pt-2 border-t border-white/[0.07] text-xs font-mono text-cream/90">
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>HTML5 Semantic Architecture</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>CSS3 &amp; Modern Layout Systems</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>JavaScript (DOM &amp; UI Logic)</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>Tailwind CSS</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>Responsive Web Design</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>Frontend UI Development</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>Git &amp; GitHub Version Control</li>
+          </ul>
+        </div>
+
+        <!-- Pillar 2: Supporting — Python Programming (Accurate Foundational Scope) -->
+        <div class="spotlight-card rounded-2xl p-6 sm:p-7 space-y-5 reveal-item">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/10 font-mono text-[11px] text-silver">FOUNDATIONAL</span>
+            <span class="font-mono text-xs text-silver">02</span>
+          </div>
+          <h3 class="font-serif text-2xl text-cream">Python Programming</h3>
+          <p class="text-xs text-silver leading-relaxed">
+            Building structured programming logic, algorithmic problem-solving habits, and practical utility scripts alongside Computer Science coursework.
+          </p>
+          <ul class="space-y-2.5 pt-2 border-t border-white/[0.07] text-xs font-mono text-cream/90">
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-silver"></span>Python Fundamentals &amp; Syntax</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-silver"></span>Core Programming Concepts</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-silver"></span>Structured Problem-Solving</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-silver"></span>Basic Utility Scripting</li>
+          </ul>
+          <div class="p-3 rounded-xl bg-obsidian/60 border border-white/[0.05] text-[11px] text-silver">
+            Currently strengthening foundational Python skills through active academic and personal practice.
+          </div>
+        </div>
+
+        <!-- Pillar 3: Supporting — Conversion Copywriting -->
+        <div class="spotlight-card rounded-2xl p-6 sm:p-7 space-y-5 reveal-item">
+          <div class="flex items-center justify-between">
+            <span class="px-2.5 py-1 rounded-md bg-white/[0.05] border border-white/10 font-mono text-[11px] text-silver">COMMUNICATION</span>
+            <span class="font-mono text-xs text-silver">03</span>
+          </div>
+          <h3 class="font-serif text-2xl text-cream">Conversion Copywriting</h3>
+          <p class="text-xs text-silver leading-relaxed">
+            Pairing clean interface engineering with persuasive, clarity-first messaging so websites communicate real value to prospective customers.
+          </p>
+          <ul class="space-y-2.5 pt-2 border-t border-white/[0.07] text-xs font-mono text-cream/90">
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>Website &amp; Landing Page Copy</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>Sales &amp; Offer Positioning</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>SEO Content &amp; Articles</li>
+            <li class="flex items-center gap-2.5"><span class="w-1.5 h-1.5 rounded-full bg-champagne"></span>Ad Copy &amp; Social Media Content</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== SELECTED WRITING SAMPLES ==================== -->
+    <section id="writing" class="max-w-6xl mx-auto px-5 sm:px-8 py-20 border-t border-white/[0.07]">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12 reveal-item">
+        <div>
+          <p class="font-mono text-xs uppercase tracking-widest text-champagne mb-2">03 / Conversion Messaging</p>
+          <h2 class="font-serif text-4xl sm:text-5xl text-cream">Selected <span class="italic text-champagne">Writing Samples</span></h2>
+        </div>
+        <span class="px-3 py-1.5 rounded-full border border-white/10 bg-charcoal text-xs font-mono text-silver self-start md:self-auto">
+          3 Conversion Copy Samples
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Sample 1: Dental Clinic Landing Page Copy -->
+        <article class="spotlight-card rounded-2xl p-6 flex flex-col justify-between space-y-5 reveal-item">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-[11px] font-mono">
+              <span class="text-champagne">SAMPLE 01</span>
+              <span class="text-silver">Conversion Copy Sample</span>
+            </div>
+            <h3 class="font-serif text-2xl text-cream">Dental Clinic Landing Page Copy</h3>
+            <div class="text-xs space-y-1 text-silver">
+              <p><strong class="text-cream">Target Audience:</strong> Local families &amp; cosmetic dentistry patients seeking painless, trustworthy care.</p>
+              <p><strong class="text-cream">Objective:</strong> Reduce dental anxiety and drive direct WhatsApp appointment consultations.</p>
+            </div>
+            <blockquote class="p-3.5 rounded-xl bg-obsidian/80 border-l-2 border-champagne text-xs text-cream/90 italic leading-relaxed">
+              “Healthy, Confident Smiles—Without the Stress of Guesswork. From gentle routine checkups to precision smile restorations, our specialists explain every step before treatment begins...”
+            </blockquote>
+          </div>
+
+          <button type="button" onclick="openWritingModal('dental')" class="w-full py-2.5 px-4 rounded-xl border border-champagne/40 bg-champagne/10 hover:bg-champagne hover:text-obsidian text-xs font-semibold text-champagne transition-all">
+            View Complete Sample
+          </button>
+        </article>
+
+        <!-- Sample 2: Beauty Salon Website Copy -->
+        <article class="spotlight-card rounded-2xl p-6 flex flex-col justify-between space-y-5 reveal-item">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-[11px] font-mono">
+              <span class="text-champagne">SAMPLE 02</span>
+              <span class="text-silver">Conversion Copy Sample</span>
+            </div>
+            <h3 class="font-serif text-2xl text-cream">Beauty Salon Website Copy</h3>
+            <div class="text-xs space-y-1 text-silver">
+              <p><strong class="text-cream">Target Audience:</strong> Brides-to-be and clients booking skin, hair, and event styling packages.</p>
+              <p><strong class="text-cream">Objective:</strong> Elevate perceived studio luxury and convert visitors into pre-booked consultations.</p>
+            </div>
+            <blockquote class="p-3.5 rounded-xl bg-obsidian/80 border-l-2 border-champagne text-xs text-cream/90 italic leading-relaxed">
+              “Refined Beauty Tailored to Your Most Unforgettable Moments. Whether preparing for your bridal day or restoring your natural glow, our artists combine personalized skin prep with timeless finishes...”
+            </blockquote>
+          </div>
+
+          <button type="button" onclick="openWritingModal('salon')" class="w-full py-2.5 px-4 rounded-xl border border-champagne/40 bg-champagne/10 hover:bg-champagne hover:text-obsidian text-xs font-semibold text-champagne transition-all">
+            View Complete Sample
+          </button>
+        </article>
+
+        <!-- Sample 3: SaaS Product Landing Page Copy -->
+        <article class="spotlight-card rounded-2xl p-6 flex flex-col justify-between space-y-5 reveal-item">
+          <div class="space-y-3">
+            <div class="flex items-center justify-between text-[11px] font-mono">
+              <span class="text-champagne">SAMPLE 03</span>
+              <span class="text-silver">Conversion Copy Sample</span>
+            </div>
+            <h3 class="font-serif text-2xl text-cream">SaaS Product Landing Page Copy</h3>
+            <div class="text-xs space-y-1 text-silver">
+              <p><strong class="text-cream">Target Audience:</strong> Small business teams and founders managing scattered client tasks and follow-ups.</p>
+              <p><strong class="text-cream">Objective:</strong> Clarify product value immediately and motivate free workspace sign-ups.</p>
+            </div>
+            <blockquote class="p-3.5 rounded-xl bg-obsidian/80 border-l-2 border-champagne text-xs text-cream/90 italic leading-relaxed">
+              “Stop Losing Client Momentum Across Five Disconnected Tools. Bring projects, approvals, and daily priorities into one calm workspace built for fast-moving teams...”
+            </blockquote>
+          </div>
+
+          <button type="button" onclick="openWritingModal('saas')" class="w-full py-2.5 px-4 rounded-xl border border-champagne/40 bg-champagne/10 hover:bg-champagne hover:text-obsidian text-xs font-semibold text-champagne transition-all">
+            View Complete Sample
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT & ACADEMIC FOUNDATION ==================== -->
+    <section id="about" class="max-w-6xl mx-auto px-5 sm:px-8 py-20 border-t border-white/[0.07]">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start reveal-item">
+        <div class="lg:col-span-5 space-y-4">
+          <p class="font-mono text-xs uppercase tracking-widest text-champagne">04 / Background &amp; Philosophy</p>
+          <h2 class="font-serif text-4xl sm:text-5xl text-cream">Code Meets <span class="italic text-champagne">Clear Business Thinking.</span></h2>
+        </div>
+
+        <div class="lg:col-span-7 space-y-6 text-sm sm:text-base text-silver leading-relaxed">
+          <p>
+            I am <strong class="text-cream font-medium">Sania Sarwar</strong>, a Frontend Developer, Python programmer, and conversion-focused copywriter currently pursuing a <strong class="text-cream font-medium">BS in Computer Science at Government College University Faisalabad (GCUF)</strong> (5th Semester, Expected Graduation: 2028).
+          </p>
+          <p>
+            My focus sits at the intersection of <strong class="text-cream font-medium">clean frontend execution</strong> and <strong class="text-cream font-medium">practical problem-solving</strong>. Having independently researched, structured, coded, and deployed five live websites—from the TechVault AI product discovery platform to service-oriented dental and salon platforms—I approach every interface with both user experience and business clarity in mind.
+          </p>
+          <p>
+            Alongside strengthening my foundational Python programming skills, I write structured website and landing page copy so businesses don’t just get an attractive layout—they get a digital presence that communicates value clearly.
+          </p>
+
+          <!-- Academic & Workflow Highlights -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="p-4 rounded-xl bg-charcoal border border-white/[0.08]">
+              <p class="font-mono text-[11px] text-champagne uppercase">Academic Track</p>
+              <p class="text-sm font-semibold text-cream mt-1">BS Computer Science</p>
+              <p class="text-xs text-silver mt-0.5">GCUF · 5th Semester · Class of 2028</p>
+            </div>
+            <div class="p-4 rounded-xl bg-charcoal border border-white/[0.08]">
+              <p class="font-mono text-[11px] text-champagne uppercase">Core Approach</p>
+              <p class="text-sm font-semibold text-cream mt-1">End-to-End Execution</p>
+              <p class="text-xs text-silver mt-0.5">Research → Copy → Responsive UI → Deployment</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== FRICTIONLESS CONTACT & DIRECT DISPATCH ==================== -->
+    <section id="contact" class="max-w-6xl mx-auto px-5 sm:px-8 py-20 border-t border-white/[0.07]">
+      <div class="spotlight-card rounded-3xl p-7 sm:p-12 reveal-item">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
+          <!-- Left Direct Channels -->
+          <div class="lg:col-span-6 space-y-6">
+            <p class="font-mono text-xs uppercase tracking-widest text-champagne">05 / Initiate Collaboration</p>
+            <h2 class="font-serif text-4xl sm:text-5xl text-cream leading-tight">
+              Have a Project in Mind? <span class="italic text-champagne">Let’s Build Something Valuable.</span>
+            </h2>
+            <p class="text-sm text-silver leading-relaxed">
+              Available for freelance frontend development, website copywriting, and software engineering internship opportunities. Reach out directly via email or WhatsApp.
+            </p>
+
+            <!-- Direct Action Links -->
+            <div class="space-y-3 pt-2">
+              <!-- Email Mailto -->
+              <a href="mailto:saniadigitalhubs@gmail.com?subject=Project%20or%20Internship%20Inquiry%20%E2%80%94%20Sania%20Sarwar" class="flex items-center justify-between p-4 rounded-xl bg-obsidian/90 border border-white/10 hover:border-champagne/60 group transition-all">
+                <div>
+                  <p class="text-[11px] font-mono text-champagne uppercase">Direct Email</p>
+                  <p class="text-sm font-medium text-cream mt-0.5">saniadigitalhubs@gmail.com</p>
+                </div>
+                <span class="text-xs font-mono text-silver group-hover:text-champagne transition-colors">Send Email →</span>
+              </a>
+
+              <!-- WhatsApp Contact -->
+              <a href="https://wa.me/923280715545?text=Hello%20Sania%2C%20I%20visited%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project%20or%20opportunity." target="_blank" rel="noopener noreferrer" class="flex items-center justify-between p-4 rounded-xl bg-obsidian/90 border border-white/10 hover:border-emeraldStatus/60 group transition-all">
+                <div>
+                  <p class="text-[11px] font-mono text-emerald-400 uppercase">WhatsApp Direct</p>
+                  <p class="text-sm font-medium text-cream mt-0.5">+92 328 0715545</p>
+                </div>
+                <span class="text-xs font-mono text-silver group-hover:text-emerald-400 transition-colors">Chat on WhatsApp →</span>
+              </a>
+            </div>
+
+            <!-- Social Profiles -->
+            <div class="flex flex-wrap items-center gap-4 pt-2 text-xs font-mono text-silver">
+              <a href="https://www.linkedin.com/in/saniasarwar-dev" target="_blank" rel="noopener noreferrer" class="hover:text-champagne transition-colors underline underline-offset-4">LinkedIn</a>
+              <span>·</span>
+              <a href="https://github.com/saniatech-ui" target="_blank" rel="noopener noreferrer" class="hover:text-champagne transition-colors underline underline-offset-4">GitHub</a>
+              <span>·</span>
+              <a href="https://www.facebook.com/profile.php?id=61555618211844&mibextid=ZbWKwL" target="_blank" rel="noopener noreferrer" class="hover:text-champagne transition-colors underline underline-offset-4">Facebook</a>
+            </div>
+          </div>
+
+          <!-- Right Quick Brief Builder (Routes cleanly to Mailto or WhatsApp) -->
+          <div class="lg:col-span-6">
+            <form id="inquiryForm" onsubmit="handleInquirySubmit(event)" class="rounded-2xl bg-obsidian/85 border border-white/[0.08] p-6 space-y-4">
+              <p class="font-mono text-xs text-cream uppercase tracking-wider">Quick Project / Internship Brief</p>
+              
+              <div>
+                <label for="senderName" class="block text-xs font-mono text-silver mb-1.5">Your Name / Organization</label>
+                <input type="text" id="senderName" required placeholder="e.g., Bilal Ahmed / Studio Lead" class="w-full px-3.5 py-2.5 rounded-xl bg-charcoal border border-white/10 text-sm text-cream placeholder:text-silver/40 focus:outline-none focus:border-champagne" />
+              </div>
+
+              <div>
+                <label for="inquiryType" class="block text-xs font-mono text-silver mb-1.5">Inquiry Scope</label>
+                <select id="inquiryType" class="w-full px-3.5 py-2.5 rounded-xl bg-charcoal border border-white/10 text-sm text-cream focus:outline-none focus:border-champagne">
+                  <option value="Frontend Website Development">Frontend Website Development</option>
+                  <option value="Website / Landing Page Copywriting">Website / Landing Page Copywriting</option>
+                  <option value="Frontend + Copywriting Package">Frontend + Copywriting Package</option>
+                  <option value="Internship / Junior Developer Opportunity">Internship / Junior Developer Opportunity</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="projectBrief" class="block text-xs font-mono text-silver mb-1.5">Project Details or Role Summary</label>
+                <textarea id="projectBrief" rows="3" required placeholder="Briefly share your timeline, goals, or requirements..." class="w-full px-3.5 py-2.5 rounded-xl bg-charcoal border border-white/10 text-sm text-cream placeholder:text-silver/40 focus:outline-none focus:border-champagne"></textarea>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                <button type="submit" class="py-3 px-4 rounded-xl bg-champagne text-obsidian font-semibold text-xs hover:bg-champagneLight transition-all">
+                  Dispatch via Email
+                </button>
+                <button type="button" onclick="dispatchViaWhatsApp()" class="py-3 px-4 rounded-xl border border-emeraldStatus/40 bg-emeraldStatus/10 text-emerald-300 font-semibold text-xs hover:bg-emeraldStatus/20 transition-all">
+                  Send via WhatsApp
+                </button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-white/[0.07] bg-obsidian py-10">
+    <div class="max-w-6xl mx-auto px-5 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-silver">
+      <div class="text-center sm:text-left">
+        <p class="text-cream font-medium">Sania Sarwar — Frontend Developer | Python Programmer | Copywriter</p>
+        <p class="font-mono text-[11px] text-silver/70 mt-1">Kasur, Punjab, Pakistan · PKT (UTC+5)</p>
+      </div>
+      <div class="font-mono text-[11px] text-silver/70">
+        © <span id="yearSpan">2026</span> Sania Sarwar. Built with Precision.
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== CASE STUDY & WRITING SAMPLE MODAL ==================== -->
+  <div id="detailModal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="relative w-full max-w-2xl max-h-[88vh] overflow-y-auto rounded-3xl bg-charcoal border border-champagne/30 p-6 sm:p-8 shadow-2xl space-y-5">
+      <div class="flex items-start justify-between gap-4 border-b border-white/[0.08] pb-4">
+        <div>
+          <p id="modalBadge" class="font-mono text-[11px] uppercase tracking-widest text-champagne">Case Study</p>
+          <h3 id="modalTitle" class="font-serif text-3xl text-cream mt-1">Title</h3>
+        </div>
+        <button type="button" onclick="closeDetailModal()" class="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-silver hover:text-cream hover:border-champagne transition-colors" aria-label="Close modal">
+          ✕
+        </button>
+      </div>
+
+      <div id="modalBody" class="space-y-4 text-sm text-silver leading-relaxed"></div>
+
+      <div id="modalFooter" class="pt-4 border-t border-white/[0.08] flex flex-wrap items-center justify-between gap-3"></div>
+    </div>
+  </div>
+
+  <!-- ==================== INTERACTIVE JAVASCRIPT ==================== -->
+  <script>
+    // 1. Set current year
+    document.getElementById('yearSpan').textContent = new Date().getFullYear();
+
+    // 2. Cursor-Tracking Border Spotlight on Luxury Cards
+    document.querySelectorAll('.spotlight-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        card.style.setProperty('--mouse-x', `${x}px`);
+        card.style.setProperty('--mouse-y', `${y}px`);
+      });
+    });
+
+    // 3. Scroll Reveal Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal-item').forEach(el => revealObserver.observe(el));
+
+    // 4. Project Category Filter Logic
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        filterButtons.forEach(b => {
+          b.classList.remove('active', 'border-champagne', 'bg-champagne/15', 'text-champagne');
+          b.classList.add('border-white/10', 'bg-charcoal', 'text-silver');
+        });
+        btn.classList.add('active', 'border-champagne', 'bg-champagne/15', 'text-champagne');
+        btn.classList.remove('border-white/10', 'bg-charcoal', 'text-silver');
+
+        projectCards.forEach(card => {
+          const cat = card.getAttribute('data-category');
+          if (filter === 'all' || cat === filter) {
+            card.style.display = '';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 5. TechVault AI Inline Case Study Sequence Tabs
+    const vaultTabsData = {
+      goal: '<strong class="text-champagne">Goal:</strong> Eliminate buyer friction when researching tech hardware by organizing curated product cards, structured category filtering, and side-by-side comparison flows in a single fast-loading interface.',
+      approach: '<strong class="text-champagne">My Approach:</strong> Designed an intuitive, product-first browsing hierarchy combining clean visual cards with instant search and comparison cues so visitors can evaluate specifications before clicking through.',
+      implementation: '<strong class="text-champagne">Implementation:</strong> Engineered independently using semantic HTML5, CSS3, and vanilla JavaScript with interactive product search, category filtering, Amazon Associates affiliate redirection, and deployment on GitHub Pages.',
+      learned: '<strong class="text-champagne">What I Learned:</strong> How information architecture, clear product micro-copy, and responsive card grids directly influence user navigation flow in commercial affiliate platforms.'
+    };
+
+    function switchVaultTab(key) {
+      document.getElementById('vaultTabContent').innerHTML = vaultTabsData[key];
+      document.querySelectorAll('.vault-tab').forEach(t => {
+        if (t.getAttribute('data-tab') === key) {
+          t.classList.add('text-champagne', 'font-semibold');
+          t.classList.remove('text-silver');
+        } else {
+          t.classList.remove('text-champagne', 'font-semibold');
+          t.classList.add('text-silver');
+        }
+      });
+    }
+
+    // 6. Detailed Case Studies Data (5 Projects)
+    const caseStudies = {
+      techvault: {
+        badge: 'Technology Platform · Flagship Case Study',
+        title: 'TechVault AI',
+        liveUrl: 'https://saniatech-ui.github.io/techvault-ai/',
+        sections: [
+          { label: 'Goal & Business Problem', text: 'Online shoppers exploring technology products often face cluttered review pages. TechVault AI was conceptualized and built to provide a clean product discovery, search, and comparison hub connected to Amazon Associates product pages.' },
+          { label: 'My Role', text: 'End-to-end independent creator: product concept, UX structure, frontend development, product card copywriting, testing, and GitHub Pages deployment.' },
+          { label: 'Implemented Features', text: 'Product discovery grid, category browsing, product search functionality, product comparison flow, structured product cards, and direct Amazon affiliate purchasing links.' },
+          { label: 'What I Learned', text: 'Balancing visual clarity with commercial product presentation and structuring front-end state cleanly for search and comparison interactions.' }
+        ],
+        note: 'Disclosure: Incorporates Amazon Associates affiliate product links.'
+      },
+      cavalry: {
+        badge: 'Healthcare & Clinic · Case Study',
+        title: 'Cavalry Dental & Aesthetic Care',
+        liveUrl: 'https://cavalry-dental-care-theta.vercel.app',
+        sections: [
+          { label: 'Goal & Business Problem', text: 'Multi-branch dental clinic platform built for Cavalry Ground & DHA Phase 6 branches, engineered to present treatments, branch details, and packages clearly while reducing booking friction.' },
+          { label: 'My Role', text: 'Independent research, UI/UX layout, conversion-focused service copywriting, frontend implementation, and Vercel deployment.' },
+          { label: 'Implemented Features', text: 'Branch-specific clinic details (Cavalry Ground & DHA Phase 6), organized treatment showcase, special packages section, responsive mobile layout, and direct WhatsApp appointment booking.' },
+          { label: 'What I Learned', text: 'Structuring healthcare service pages so prospective patients immediately locate branch access, treatment clarity, and booking actions.' }
+        ],
+        note: ''
+      },
+      ayzal: {
+        badge: 'Beauty & Salon · Case Study',
+        title: 'Ayzal Beauty Salon',
+        liveUrl: 'https://ayzal-beauty-salon.vercel.app',
+        sections: [
+          { label: 'Goal & Business Problem', text: 'Digital salon platform tailored for Ayzal Beauty Salon in Allama Iqbal Town to present bridal, makeup, and skin care services in a refined, easy-to-browse mobile experience.' },
+          { label: 'My Role', text: 'Independent design direction, frontend build, service copy structuring, and deployment on Vercel.' },
+          { label: 'Implemented Features', text: 'Bridal services showcase, makeup and skin treatment categories, responsive design across mobile and desktop viewports, and direct WhatsApp booking links.' },
+          { label: 'What I Learned', text: 'Creating visual hierarchy and warm editorial presentation tailored to beauty and bridal service clients.' }
+        ],
+        note: ''
+      },
+      dreamsmile: {
+        badge: 'Healthcare & Clinic · Case Study',
+        title: 'Dream Smile Dental Clinic',
+        liveUrl: 'https://dream-smile-clinic-five.vercel.app',
+        sections: [
+          { label: 'Goal & Business Problem', text: 'Cosmetic dentistry web experience designed for Dream Smile Dental Clinic in Bahria Town, highlighting specialized aesthetic treatments such as Emax Veneers and Invisalign alongside practitioner credentials.' },
+          { label: 'My Role', text: 'Independent UI architecture, frontend coding, treatment overview copy, and Vercel deployment.' },
+          { label: 'Implemented Features', text: 'Doctor profile presentation, dedicated Emax Veneers & Invisalign service blocks, responsive navigation, and WhatsApp appointment booking.' },
+          { label: 'What I Learned', text: 'Presenting high-trust cosmetic dental procedures with educational clarity and accessible call-to-action placement.' }
+        ],
+        note: ''
+      },
+      saadia: {
+        badge: 'Beauty & Salon · Case Study',
+        title: 'Saadia’s Studio & Salon',
+        liveUrl: 'https://saadia-studio-salon.vercel.app',
+        sections: [
+          { label: 'Goal & Business Problem', text: 'Bridal and beauty studio platform crafted for Saadia’s Studio & Salon in Johar Town, organizing bridal, hair, and skin offerings into a premium, structured digital storefront.' },
+          { label: 'My Role', text: 'Independent layout design, frontend engineering, service categorization, and Vercel deployment.' },
+          { label: 'Implemented Features', text: 'Bridal services, hair styling, and skin care sections; mobile-responsive layout; and streamlined WhatsApp appointment inquiries.' },
+          { label: 'What I Learned', text: 'Designing clean multi-category service layouts that remain fast and scannable on mobile devices.' }
+        ],
+        note: ''
+      }
+    };
+
+    // 7. Complete Independent Copywriting Samples Data
+    const writingSamples = {
+      dental: {
+        badge: 'Conversion Copy Sample · Sample 01',
+        title: 'Dental Clinic Landing Page Copy',
+        content: `
+          <div class="space-y-4">
+            <div class="p-4 rounded-xl bg-obsidian border border-white/10 space-y-2">
+              <p class="font-mono text-[11px] text-champagne uppercase">Hero Headline &amp; Subheadline</p>
+              <h4 class="font-serif text-2xl text-cream">Healthy, Confident Smiles—Without the Stress of Guesswork.</h4>
+              <p class="text-xs sm:text-sm text-silver">From gentle routine checkups to precision smile restorations, our dental specialists explain every option clearly before treatment begins—so you stay comfortable, informed, and in control.</p>
+            </div>
+            <div class="space-y-2 text-xs sm:text-sm">
+              <p class="font-mono text-[11px] text-champagne uppercase">Value Pillars</p>
+              <p><strong class="text-cream">1. Transparent Treatment Plans:</strong> Clear timelines and honest guidance with zero hidden surprises.</p>
+              <p><strong class="text-cream">2. Modern Comfort-First Care:</strong> Gentle techniques designed to put anxious patients and families at ease.</p>
+              <p><strong class="text-cream">3. Convenient Scheduling:</strong> Direct WhatsApp appointment booking with fast confirmation from our front desk.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-champagne/10 border border-champagne/30 text-xs text-cream">
+              <strong>Call to Action:</strong> Book Your Consultation on WhatsApp Today →
+            </div>
+          </div>
+        `
+      },
+      salon: {
+        badge: 'Conversion Copy Sample · Sample 02',
+        title: 'Beauty Salon Website Copy',
+        content: `
+          <div class="space-y-4">
+            <div class="p-4 rounded-xl bg-obsidian border border-white/10 space-y-2">
+              <p class="font-mono text-[11px] text-champagne uppercase">Hero Headline &amp; Subheadline</p>
+              <h4 class="font-serif text-2xl text-cream">Refined Beauty Tailored to Your Most Unforgettable Moments.</h4>
+              <p class="text-xs sm:text-sm text-silver">Whether preparing for your bridal day or restoring your skin’s natural radiance, our senior stylists pair personalized skin prep with timeless, camera-ready finishes.</p>
+            </div>
+            <div class="space-y-2 text-xs sm:text-sm">
+              <p class="font-mono text-[11px] text-champagne uppercase">Signature Experiences</p>
+              <p><strong class="text-cream">Bridal &amp; Event Artistry:</strong> Custom-blended looks crafted to complement your features, outfit, and lighting.</p>
+              <p><strong class="text-cream">Targeted Skin &amp; Hair Rituals:</strong> Restorative treatments designed for lasting glow and healthy texture.</p>
+              <p><strong class="text-cream">Private Consultations:</strong> One-on-one pre-event trials so you walk into your occasion with complete confidence.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-champagne/10 border border-champagne/30 text-xs text-cream">
+              <strong>Call to Action:</strong> Reserve Your Bridal or Salon Appointment →
+            </div>
+          </div>
+        `
+      },
+      saas: {
+        badge: 'Conversion Copy Sample · Sample 03',
+        title: 'SaaS Product Landing Page Copy',
+        content: `
+          <div class="space-y-4">
+            <div class="p-4 rounded-xl bg-obsidian border border-white/10 space-y-2">
+              <p class="font-mono text-[11px] text-champagne uppercase">Hero Headline &amp; Subheadline</p>
+              <h4 class="font-serif text-2xl text-cream">Stop Losing Client Momentum Across Five Disconnected Tools.</h4>
+              <p class="text-xs sm:text-sm text-silver">Bring project milestones, client approvals, and daily team priorities into one calm workspace—so deadlines stay visible and nothing slips through the cracks.</p>
+            </div>
+            <div class="space-y-2 text-xs sm:text-sm">
+              <p class="font-mono text-[11px] text-champagne uppercase">Core Product Outcomes</p>
+              <p><strong class="text-cream">Instant Project Clarity:</strong> See who owns every deliverable and what ships next in a single glance.</p>
+              <p><strong class="text-cream">Frictionless Client Approvals:</strong> Share live progress links without endless email threads.</p>
+              <p><strong class="text-cream">5-Minute Setup:</strong> Import your active tasks and invite your team without complex onboarding.</p>
+            </div>
+            <div class="p-3.5 rounded-xl bg-champagne/10 border border-champagne/30 text-xs text-cream">
+              <strong>Call to Action:</strong> Start Your Free Workspace — No Credit Card Required →
+            </div>
+          </div>
+        `
+      }
+    };
+
+    const modal = document.getElementById('detailModal');
+    const modalBadge = document.getElementById('modalBadge');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalFooter = document.getElementById('modalFooter');
+
+    function openCaseStudyModal(key) {
+      const data = caseStudies[key];
+      if (!data) return;
+      modalBadge.textContent = data.badge;
+      modalTitle.textContent = data.title;
+
+      modalBody.innerHTML = data.sections.map(sec => `
+        <div class="p-4 rounded-xl bg-obsidian/80 border border-white/[0.07] space-y-1">
+          <p class="font-mono text-[11px] text-champagne uppercase">${sec.label}</p>
+          <p class="text-xs sm:text-sm text-cream/90 leading-relaxed">${sec.text}</p>
+        </div>
+      `).join('') + (data.note ? `<p class="text-[11px] font-mono text-silver/80 pt-1">${data.note}</p>` : '');
+
+      modalFooter.innerHTML = `
+        <a href="${data.liveUrl}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-champagne text-obsidian font-semibold text-xs hover:bg-champagneLight transition-all">
+          <span>View Live Website</span>
+          <span>↗</span>
+        </a>
+        <button type="button" onclick="closeDetailModal()" class="px-4 py-2.5 rounded-xl border border-white/15 text-xs font-mono text-silver hover:text-cream">Close</button>
+      `;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function openWritingModal(key) {
+      const data = writingSamples[key];
+      if (!data) return;
+      modalBadge.textContent = data.badge;
+      modalTitle.textContent = data.title;
+      modalBody.innerHTML = data.content;
+      modalFooter.innerHTML = `
+        <span class="text-[11px] font-mono text-silver">Written by Sania Sarwar · Conversion Copy Sample</span>
+        <button type="button" onclick="closeDetailModal()" class="px-4 py-2 rounded-xl border border-white/15 text-xs font-mono text-cream hover:border-champagne">Close Sample</button>
+      `;
+
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeDetailModal() {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeDetailModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+        closeDetailModal();
+      }
+    });
+
+    // 8. Quick Copy Email Helper
+    function copyEmailQuick() {
+      navigator.clipboard.writeText('saniadigitalhubs@gmail.com').then(() => {
+        const tag = document.getElementById('copyStatusTag');
+        tag.textContent = 'COPIED';
+        setTimeout(() => { tag.textContent = 'COPY'; }, 2200);
+      });
+    }
+
+    // 9. Form Dispatch via Email (Mailto) or WhatsApp
+    function handleInquirySubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('senderName').value.trim();
+      const scope = document.getElementById('inquiryType').value;
+      const brief = document.getElementById('projectBrief').value.trim();
+
+      const subject = encodeURIComponent(`${scope} Inquiry from ${name}`);
+      const body = encodeURIComponent(`Hello Sania,\n\nName/Organization: ${name}\nInquiry Scope: ${scope}\n\nDetails:\n${brief}\n\nSent via Sania Sarwar Portfolio`);
+      window.location.href = `mailto:saniadigitalhubs@gmail.com?subject=${subject}&body=${body}`;
+    }
+
+    function dispatchViaWhatsApp() {
+      const name = document.getElementById('senderName').value.trim() || 'Prospective Client';
+      const scope = document.getElementById('inquiryType').value;
+      const brief = document.getElementById('projectBrief').value.trim() || 'I would like to discuss a project or opportunity.';
+
+      const text = encodeURIComponent(`Hello Sania,\n\nName: ${name}\nInquiry Type: ${scope}\nProject Details: ${brief}`);
+      window.open(`https://wa.me/923280715545?text=${text}`, '_blank', 'noopener,noreferrer');
+    }
+  </script>
+</body>
+</html>
