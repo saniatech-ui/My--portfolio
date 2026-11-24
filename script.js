@@ -1,4 +1,3 @@
-
 /* ==========================================================================
    Sania Sarwar — Executive Portfolio Interactive Engine (script.js)
    Handles: Spotlight Tracking, Reveal Animations, 6-Project Filter System,
@@ -320,6 +319,7 @@ function openCaseStudyModal(key) {
 
   modal.classList.remove('hidden');
   modal.classList.add('flex');
+  modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 
@@ -338,6 +338,7 @@ function openWritingModal(key) {
 
   modal.classList.remove('hidden');
   modal.classList.add('flex');
+  modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
 }
 
@@ -345,6 +346,7 @@ function closeDetailModal() {
   if (!modal) return;
   modal.classList.add('hidden');
   modal.classList.remove('flex');
+  modal.style.display = 'none';
   document.body.style.overflow = '';
 }
 
